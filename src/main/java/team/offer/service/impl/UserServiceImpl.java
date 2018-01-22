@@ -3,11 +3,13 @@ package team.offer.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.offer.dao.UserDao;
+import team.offer.entity.Position;
 import team.offer.entity.User;
 import team.offer.service.UserService;
 import team.offer.service.exception.DeleteRepeatException;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author:L1ANN
@@ -31,6 +33,50 @@ public class UserServiceImpl implements UserService {
      */
     public User findUserById(Integer id) throws Exception {
 
-        return userDao.findUserById(id);
+        return userDao.queryUserById(id);
+    }
+
+    public void register(User user) throws Exception {
+
+    }
+
+    public User login(User user) throws Exception {
+        return null;
+    }
+
+    public void forgetPassword(String password) throws Exception {
+
+    }
+
+    public void updatePassword(String oldPassword, String newPassword) throws Exception {
+
+    }
+
+    public List<Position> collection(Integer id) throws Exception {
+        return null;
+    }
+
+    public void deleteCollection(Integer id) throws Exception {
+
+    }
+
+    public List<Position> newApplication(Integer id) throws Exception {
+        return null;
+    }
+
+    public List<Position> consultedApplication(Integer id) throws Exception {
+        return null;
+    }
+
+    public List<Position> arrangedApplication(Integer id) throws Exception {
+        return null;
+    }
+
+    public void deliverPosition(Integer uid, Integer pid) throws Exception {
+
+    }
+
+    public void collectionPosition(Integer uid, Integer pid) throws Exception {
+
     }
 }

@@ -1,5 +1,10 @@
 package team.offer.dao;
 
+import team.offer.entity.Position;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Author:L1ANN
  * @Description:
@@ -7,4 +12,9 @@ package team.offer.dao;
  * @Modified By:
  */
 public interface PositionDao {
+    //根据职位id查询职位
+    Position queryPositionById(Integer id) throws Exception;
+
+    //根据名称和查询关键字搜索职位集合
+    List<Position> queryPositionByConditions(String name, Map<String,List<String>> keyWords) throws Exception;
 }
