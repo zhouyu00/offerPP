@@ -1,5 +1,10 @@
 package team.offer.service;
 
+import team.offer.entity.Position;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Author:L1ANN
  * @Description:
@@ -7,4 +12,9 @@ package team.offer.service;
  * @Modified By:
  */
 public interface PositionService {
+    //职位详情
+    Position detailOfPosition(Integer id) throws Exception;
+
+    //职位搜索
+    List<Position> queryPosition(String name, Map<String,List<String>> keyWords) throws Exception;
 }

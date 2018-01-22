@@ -1,6 +1,9 @@
 package team.offer.service;
 
+import team.offer.entity.Position;
 import team.offer.entity.User;
+
+import java.util.List;
 
 /**
  * @Author:L1ANN
@@ -12,4 +15,38 @@ public interface UserService {
 
     //获取个人详细信息
     User findUserById(Integer id) throws Exception;
+
+    //用户注册
+    void register(User user) throws Exception;
+
+    //用户登录
+    User login(User user) throws Exception;
+
+    //忘记密码
+    void forgetPassword(String password) throws Exception;
+
+    //修改密码
+    void updatePassword(String oldPassword,String newPassword) throws Exception;
+
+    //用户查看收藏的职位
+    List<Position> collection(Integer id) throws Exception;
+
+    //用户删除收藏的职位
+    void deleteCollection(Integer id) throws Exception;
+
+    //查看新投递
+    List<Position> newApplication(Integer id) throws Exception;
+
+    //查看已查阅
+    List<Position> consultedApplication(Integer id) throws Exception;
+
+    //查看待安排
+    List<Position> arrangedApplication(Integer id) throws Exception;
+
+    //投递职位
+    void deliverPosition(Integer uid,Integer pid) throws Exception;
+
+    //收藏职位
+    void collectionPosition(Integer uid,Integer pid) throws Exception;
+
 }
