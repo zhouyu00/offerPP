@@ -110,4 +110,21 @@ public class Position {
     public void setPositionSkill(String positionSkill) {
         this.positionSkill = positionSkill == null ? null : positionSkill.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "pkPositionId=" + pkPositionId +
+                ", comId=" + comId +
+                ", postionName='" + postionName + '\'' +
+                ", positionProperty='" + positionProperty + '\'' +
+                ", positionPlace='" + positionPlace + '\'' +
+                ", positionEducation='" + positionEducation + '\'' +
+                ", positionExperiment='" + positionExperiment + '\'' +
+                ", positionSalary='" + positionSalary + '\'' +
+                ", positionWelfare='" + positionWelfare + '\'' +
+                ", positionIntroduction='" + positionIntroduction + '\'' +
+                ", positionSkill='" + positionSkill + '\'' +
+                '}';
+    }
 }

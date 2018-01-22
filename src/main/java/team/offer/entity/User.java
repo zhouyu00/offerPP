@@ -37,6 +37,8 @@ public class User {
 
     private Boolean userTop;
 
+    private long userLastLogin;
+
     public Integer getPkUserId() {
         return pkUserId;
     }
@@ -179,5 +181,38 @@ public class User {
 
     public void setUserTop(Boolean userTop) {
         this.userTop = userTop;
+    }
+
+    public long getUserLastLogin() {
+        return userLastLogin;
+    }
+
+    public void setUserLastLogin(long userLastLogin) {
+        this.userLastLogin = userLastLogin;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "pkUserId=" + pkUserId +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userIcon='" + userIcon + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userAge=" + userAge +
+                ", userAddressCountry='" + userAddressCountry + '\'' +
+                ", userAddressCity='" + userAddressCity + '\'' +
+                ", userDirection='" + userDirection + '\'' +
+                ", userStation='" + userStation + '\'' +
+                ", userExperience='" + userExperience + '\'' +
+                ", userSkill='" + userSkill + '\'' +
+                ", userWorkAddress='" + userWorkAddress + '\'' +
+                ", userEducation='" + userEducation + '\'' +
+                ", userWorkExperience='" + userWorkExperience + '\'' +
+                ", userIntroduction='" + userIntroduction + '\'' +
+                ", userTop=" + userTop +
+                ", userLastLogin=" + userLastLogin +
+                '}';
     }
 }
