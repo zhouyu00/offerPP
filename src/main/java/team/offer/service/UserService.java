@@ -19,7 +19,7 @@ public interface UserService {
     //用户注册
     void register(User user) throws Exception;
 
-    //用户登录
+    //用户登录(每次登录还需要更新上线时间)
     User login(User user) throws Exception;
 
     //忘记密码

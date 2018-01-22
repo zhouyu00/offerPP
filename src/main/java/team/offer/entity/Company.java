@@ -25,6 +25,8 @@ public class Company {
 
     private Integer comPostlimit;
 
+    private int comPass;
+
     public Integer getPkComId() {
         return pkComId;
     }
@@ -119,5 +121,32 @@ public class Company {
 
     public void setComPostlimit(Integer comPostlimit) {
         this.comPostlimit = comPostlimit;
+    }
+
+    public int getComPass() {
+        return comPass;
+    }
+
+    public void setComPass(int comPass) {
+        this.comPass = comPass;
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "pkComId=" + pkComId +
+                ", comNo=" + comNo +
+                ", comEmail='" + comEmail + '\'' +
+                ", comPassword='" + comPassword + '\'' +
+                ", comName='" + comName + '\'' +
+                ", comIndustry='" + comIndustry + '\'' +
+                ", comLocation='" + comLocation + '\'' +
+                ", comSize=" + comSize +
+                ", comLegalperson='" + comLegalperson + '\'' +
+                ", comIntro='" + comIntro + '\'' +
+                ", comContact='" + comContact + '\'' +
+                ", comPostlimit=" + comPostlimit +
+                ", comPass=" + comPass +
+                '}';
     }
 }
