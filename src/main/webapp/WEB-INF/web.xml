@@ -22,7 +22,7 @@
             是classpath下的：servlet名称+"-servlet.xml"
             即springmvc-servlet.xml
             -->
-            <param-value>classpath:spring/spring-*.xml</param-value>
+            <param-value>classpath:/spring/spring-*.xml</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
