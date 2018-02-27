@@ -117,9 +117,6 @@ public class CompanyController {
     public String updateCompany
     (String oldPass,String newPass,String newPassConfirm,Model model){
 
-        if(newPass.equals(newPassConfirm)){
-
-        }
         return "companyDetails";
     }
 }
