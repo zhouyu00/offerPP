@@ -1,4 +1,6 @@
 pom.xml
+offerPP.iml
+db.properties
 
 #intellij
 *.iml
