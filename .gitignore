@@ -1,8 +1,0 @@
-#intellij
-*.iml
-
-#local files
-.idea/
-*/.idea/
-C:/
-*.C:/
