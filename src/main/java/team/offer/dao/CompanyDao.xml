@@ -20,7 +20,6 @@
 
 
     <sql id="companyCols">
-        pk_com_id,
         com_no,
         com_email,
         com_password,
@@ -35,27 +34,55 @@
         com_pass
     </sql>
 
+    <sql id="userCols">
+        user.pk_user_id,
+        user.user_email,
+        user.user_password,
+        user.user_icon,
+        user.user_name,
+        user.user_phone,
+        user.user_age,
+        user.user_address_country,
+        user.user_address_city,
+        user.user_direction,
+        user.user_station,
+        user.user_experience,
+        user.user_skill,
+        user.user_work_address,
+        user.user_education,
+        user.user_work_experience,
+        user.user_introduction,
+        user.user_top
+    </sql>
+
+    <sql id="applicationCols">
+        pk_apply_id,
+        user_id,
+        position_id,
+        application_status
+    </sql>
+
 
 
     <!--增加新公司-->
     <insert id="insertCompany" parameterType="company">
-        insert into company(
+        insert into company (
         <include refid="companyCols"/>
         )
-        values(
-        #{pkComId},
-        #{comNo},
-        #{comEmail},
-        #{comPassword},
-        #{comName},
-        #{comIndustry},
-        #{comLocation},
-        #{comSize},
-        #{comLegalperson},
-        #{comIntro},
-        #{comContact},
+        values
+        (
+        #{company.comNo},
+        #{company.comEmail},
+        #{company.comPassword},
+        #{company.comName},
+        #{company.comIndustry},
+        #{company.comLocation},
+        #{company.comSize},
+        #{company.comLegalperson},
+        #{company.comIntro},
+        #{company.comContact},
         10,
-        FALSE
+        #{company.comPass}
         );
     </insert>
 
@@ -63,6 +90,7 @@
     <select id="getCompanyById" parameterType="int"
             resultType="team.offer.entity.Company">
         select
+        pk_com_id,
         <include refid="companyCols"/>
         from company
         where pk_com_id=#{pkComId}
@@ -72,22 +100,113 @@
     <select id="getCompanyByEmail" parameterType="string"
             resultType="team.offer.entity.Company">
         select
+        pk_com_id,
         <include refid="companyCols"/>
         from company
         where com_email=#{comEmail}
     </select>
 
+
     <!--获取所有公司列表-->
     <select id="getCompanyList" resultType="team.offer.entity.Company">
         SELECT
+        pk_com_id,
         <include refid="companyCols"/>
         FROM company
     </select>
 
     <!--修改公司密码-->
     <update id="updateCompany" parameterType="company">
-        UPDATE
-        SET com_pass=#{comPass}
-        WHERE pk_com_id=#{pkComId}
+        UPDATE company
+        SET com_password=#{company.comPassword}
+        WHERE pk_com_id=#{company.pkComId}
     </update>
+
+    <!--根据positionID查询简历-->
+    <select id="getResumes" parameterType="int" resultType="team.offer.entity.User">
+        select
+        <include refid="userCols"/>
+        from user
+        RIGHT join application ON user.pk_user_id=application.user_id
+        WHERE application.position_id=#{pkPositionId} AND application_status=0
+    </select>
+
+    <!--根据userid查询简历详情-->
+    <select id="getResumeDetails" parameterType="int" resultType="team.offer.entity.User">
+        select
+        <include refid="userCols"/>
+        from user
+        where pk_user_id=#{pkUserId}
+    </select>
+
+    <!--根据userid设置简历状态-->
+    <update id="updateResumeById">
+        update application
+        set application_status=#{applicationStatus}
+        where user_id=#{userId}
+    </update>
+
+    <!--根据userid查询简历状态-->
+    <select id="getApplicationStatusById" parameterType="int" resultType="int">
+        select application_status
+        from application
+        where user_id=#{userId} and position_id=#{pid}
+    </select>
+
+    <sql id="positionCols">
+        com_id,
+        position_name,
+        position_property,
+        position_place,
+        position_education,
+        position_experiment,
+        position_salary,
+        position_welfare,
+        position_introduction,
+        position_skill
+    </sql>
+
+    <!--增加新职位-->
+    <insert id="insertPosition" parameterType="position"
+    useGeneratedKeys="true" keyProperty="pkPositionId">
+        insert into position
+        (
+        <include refid="positionCols"/>
+        )
+        values (
+        #{comId},
+        #{positionName},
+        #{positionProperty},
+        #{positionPlace},
+        #{positionEducation},
+        #{positionExperiment},
+        #{positionSalary},
+        #{positionWelfare},
+        #{positionIntroduction},
+        #{positionSkill}
+        )
+    </insert>
+
+    <!--根据企业id查询职位集合-->
+    <select id="queryPositionByComId" parameterType="int" resultType="team.offer.entity.Position">
+        SELECT
+        pk_position_id,
+        <include refid="positionCols"/>
+        from position
+        where com_id=#{comId}
+    </select>
+
+    <!---根据职位id删除职位-->
+    <delete id="deletePositionById" parameterType="int">
+        delete FROM
+        position
+        where pk_position_id=#{pkPositionId}
+    </delete>
+
+    <!--根据职位id删除申请-->
+    <delete id="deleteApplicationByPositionId" parameterType="int">
+        DELETE FROM
+        application
+        WHERE position_id=#{positionId}
+    </delete>
 </mapper>
