@@ -25,7 +25,7 @@ public class JavaEmailSender {
         //发送服务器需要身份验证
         props.setProperty("mail.smtp.auth","true");
         //设置邮件服务器主机名
-        props.setProperty("mail.host","smtp.qq.coom");
+        props.setProperty("mail.host","smtp.qq.com");
         //发送邮件协议名称
         props.setProperty("mail.transport.protocol","smtp");
 
@@ -39,17 +39,16 @@ public class JavaEmailSender {
         Session session = Session.getInstance(props);
 
         //发送的消息，基于观察者模式进行设计的
-        Message msg = new MimeMessage(session);
-        msg.setSubject(emailTitle);
+        MimeMessage msg = new MimeMessage(session);
+        msg.setSubject(emailTitle,"utf-8");
         //使用StringBuilder，因为StringBuilder加载速度会比String快，而且线程安全性也不错
         StringBuilder builder = new StringBuilder();
         builder.append("\n" + emailContent);
-        builder.append("\n时间" + new Date());
-        msg.setText(builder.toString());
+        msg.setText(builder.toString(),"utf-8");
         msg.setFrom(new InternetAddress("342141672@qq.com"));
 
         Transport transport = session.getTransport();
-        transport.connect("smtp.qq.com","342141672@qq.com","dszwuyamqyoxbjia");
+        transport.connect("smtp.qq.com","342141672@qq.com","zuoyhdaaebgcbigd");
         //发送消息
         transport.sendMessage(msg,new Address[]{new InternetAddress(toEmailAddress)});
         transport.close();

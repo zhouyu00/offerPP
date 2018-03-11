@@ -1,12 +1,25 @@
 package team.offer.entity;
 
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+
 public class Company {
+
     private Integer pkComId;
 
+    @NotNull(message = "企业注册号不能为空")
     private Integer comNo;
 
+   @NotEmpty(message="邮箱不能为空")
+    @Email(message = "邮箱格式不正确")
     private String comEmail;
 
+    @NotEmpty(message = "密码不能为空")
+    @Length(min = 6,max = 16,message = "密码必须为6-16位字符")
     private String comPassword;
 
     private String comName;

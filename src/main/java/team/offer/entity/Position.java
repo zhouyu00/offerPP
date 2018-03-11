@@ -5,7 +5,7 @@ public class Position {
 
     private Integer comId;
 
-    private String postionName;
+    private String positionName;
 
     private String positionProperty;
 
@@ -23,6 +23,7 @@ public class Position {
 
     private String positionSkill;
 
+
     public Integer getPkPositionId() {
         return pkPositionId;
     }
@@ -37,14 +38,6 @@ public class Position {
 
     public void setComId(Integer comId) {
         this.comId = comId;
-    }
-
-    public String getPostionName() {
-        return postionName;
-    }
-
-    public void setPostionName(String postionName) {
-        this.postionName = postionName == null ? null : postionName.trim();
     }
 
     public String getPositionProperty() {
@@ -111,12 +104,20 @@ public class Position {
         this.positionSkill = positionSkill == null ? null : positionSkill.trim();
     }
 
+    public String getPositionName() {
+        return positionName;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
+
     @Override
     public String toString() {
         return "Position{" +
                 "pkPositionId=" + pkPositionId +
                 ", comId=" + comId +
-                ", postionName='" + postionName + '\'' +
+                ", positionName='" + positionName + '\'' +
                 ", positionProperty='" + positionProperty + '\'' +
                 ", positionPlace='" + positionPlace + '\'' +
                 ", positionEducation='" + positionEducation + '\'' +

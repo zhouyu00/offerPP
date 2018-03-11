@@ -7,8 +7,11 @@
         SELECT  pk_administrator_name,administrator_password from administrator where pk_administrator_name = #{_parameter}
     </select>
 
-    <select id="listInactiveUsers" parameterType="long" resultType="User">
-        SELECT * from user WHERE #{_parameter} - userLastLogin >= 31536000000
+    <!--<select id="listInactiveUsers" parameterType="long" resultType="User">-->
+    <!--SELECT * from user WHERE #{_parameter} - userLastLogin >= 31536000000-->
+<!--</select>-->
+    <select id="listInactiveUsers" resultType="User">
+        SELECT * from user
     </select>
 
     <delete id="deleteUser" parameterType="int" >
@@ -20,34 +23,24 @@
     </select>
 
     <select id="listNotPassCompanys" resultType="Company">
-        SELECT * FROM  company WHERE com_pass = NULL
+        SELECT * FROM  company WHERE com_pass = 0
     </select>
 
-    <update id="modifyCompanyPass" parameterType="java.util.Arrays">
-        UPDATE company SET
-        <foreach collection="array" index="i">
-            <if test="i==0">
-                com_pass = #{array[i]} WHERE
-            </if>
-            <if test="i==1">
-                pk_com_id = #{array[i]}
-            </if>
-        </foreach>
+    <update id="modifyCompanyPass" >
+        UPDATE company SET com_pass = #{value} WHERE pk_com_id = #{id}
     </update>
 
     <select id="findAllCompanys" resultType="Company">
-        SELECT * FROM  company
+        SELECT * FROM company
     </select>
 
-    <update id="setPositionLimit" parameterType="java.util.Arrays">
-        UPDATE company SET
-        <foreach collection="array" index="i">
-            <if test="i==0">
-                com_postlimit = #{array[i]} WHERE
-            </if>
-            <if test="i==1">
-                pk_com_id = #{array[i]}
-            </if>
-        </foreach>
+    <update id="setPositionLimit" >
+        UPDATE company SET com_postlimit = #{limit} WHERE pk_com_id = #{id}
     </update>
+
+    <update id="adminModifyPassword" >
+        UPDATE administrator SET administrator_password = #{password} WHERE pk_administrator_name = #{id}
+    </update>
+
+
 </mapper>

@@ -2,5 +2,80 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.offer.dao.PositionDao">
 
+    <!--查询职位-->
+    <select id="queryPosition" resultType="PositionQuery">
+        SELECT *
+        FROM position as ps
+        inner join company as com
+        where ps.com_id = com.pk_com_id
+        LIMIT 5
 
+    </select>
+
+    <!--根据职位id查询职位详情-->
+    <select id="queryPositionById" parameterType="int" resultType="PositionQuery">
+        select * from position as ps
+        inner join company as com
+        where ps.com_id = com.pk_com_id and pk_position_id = #{id}
+    </select>
+
+    <!--多条件查询职位-->
+    <select id="queryPositionByConditions" resultType="PositionQuery">
+        select *
+        -- pk_position_id,com_id,position_name,position_property,position_place,position_education,
+        -- position_experiment,position_salary,position_welfare,position_introduction,position_skill,
+        -- com_name,com_industry
+        from
+        <!--获取用户_公司联合表-->
+        (select * from position as ps inner join company as cp where ps.com_id = cp.pk_com_id ) user_com
+        <where>
+            <!--如果传入name查询条件，则进行name的模糊查询-->
+            <if test="name!=null and name!=''">
+                position_name LIKE '%${name}%'
+            </if>
+
+            <!--如果传入time工作经验查询条件，则进行sql拼接-->
+            <if test="times!=null and times.size()>0">
+                <foreach collection="times" item="time" open="and position_experiment in (" separator="," close=")">
+                    #{time}
+                </foreach>
+            </if>
+
+            <!--如果传入places工作地点集合查询条件，则进行sql拼接-->
+            <if test="places!=null and places.size()>0">
+                <foreach collection="places" item="place" open="and position_place in (" separator="," close=")">
+                    #{place}
+                </foreach>
+            </if>
+
+            <!--如果传入sizes公司规模查询条件，则进行sql拼接-->
+            <if test="sizes!=null and sizes.size()>0">
+                <foreach collection="sizes" item="size" open="and com_size in (" separator="," close=")">
+                    #{size}
+                </foreach>
+            </if>
+
+            <!--如果传入educations学历要求查询条件，则进行sql拼接-->
+            <if test="educations!=null and educations.size()>0">
+                <foreach collection="educations" item="education" open="and position_education in (" separator=","
+                         close=")">
+                    #{education}
+                </foreach>
+            </if>
+
+            <!--如果传入industries所属行业查询条件，则进行sql拼接-->
+            <if test="industries!=null and industries.size()>0">
+                <foreach collection="industries" item="industry" open="and com_industry in (" separator="," close=")">
+                    #{industry}
+                </foreach>
+            </if>
+            <!--如果传入properties职位性质查询条件，则进行sql拼接-->
+            <if test="properties!=null and properties.size()>0">
+                <foreach collection="properties" item="property" open="and position_property in (" separator=","
+                         close=")">
+                    #{property}
+                </foreach>
+            </if>
+        </where>
+    </select>
 </mapper>

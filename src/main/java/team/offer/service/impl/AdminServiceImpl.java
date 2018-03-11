@@ -16,16 +16,16 @@ package team.offer.service.impl;
  * @Date:Created in 16:07 2018/1/19
  * @Modified By:
  */
+
 @Service
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminDao adminDao;
 
     //管理员登录
-    public boolean adminLogin(Object id,Object password) throws Exception{
-        Admin admin = new Admin();
-        admin = adminDao.findAdminById(Integer.parseInt(id.toString()));
-        if(admin.getAdminnistratorPassword().equals(password))
+    public Boolean adminLogin(int id,String password) throws Exception{
+        Admin admin =  adminDao.findAdminById(id);
+        if(admin.getAdministratorPassword().equals(password))
             return true;
         return false;
     }
@@ -37,10 +37,18 @@ public class AdminServiceImpl implements AdminService {
         return userList;
     }
 
+//    //返回指定数量用户
+//    public List<User> listBoundUsers() throws Exception{
+//        List<User> userList = adminDao.listInactiveUsers();
+//        return userList;
+//    }
+
     //删除用户
-    public boolean deleteUser(Object id) throws Exception{
-        adminDao.deleteUser(Integer.parseInt(id.toString()));
-        return true;
+    public Boolean deleteUser(int id) throws Exception{
+        int influenceLine = adminDao.deleteUser(id);
+        if(influenceLine == 1)
+            return true;
+        return false;
     }
 
     //企业审核页面
@@ -50,9 +58,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     //审核具体的企业
-    public boolean verify(Object i,Object id) throws Exception{
-        adminDao.modifyCompanyPass(Integer.parseInt(i.toString()),Integer.parseInt(id.toString()));
-        return true;
+    public Boolean modifyCompanyPass(int i,int id) throws Exception{
+        int influenceLine = adminDao.modifyCompanyPass(i,id);
+        if(influenceLine == 1)
+            return  true;
+        return false;
     }
 
     //管理所有企业上限页面
@@ -62,8 +72,18 @@ public class AdminServiceImpl implements AdminService {
     }
 
     //修改具体的企业发布岗位上限
-    public Boolean setPositionLimit(Object limit,Object id) throws Exception{
-        adminDao.setPositionLimit(Integer.parseInt(limit.toString()),Integer.parseInt(id.toString()));
+    public Boolean setPositionLimit(int limit,int id) throws Exception{
+        int influenceLine = adminDao.setPositionLimit(limit,id);
+        if(influenceLine == 1)
+            return  true;
+        return false;
+    }
+
+    //管理员修改密码
+    public Boolean adminModifyPassword(int id,String password) throws Exception {
+        int influenceLine = adminDao.adminModifyPassword(id,password);
+        if(influenceLine == 1)
+            return  true;
         return false;
     }
 }

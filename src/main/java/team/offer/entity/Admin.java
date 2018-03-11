@@ -7,10 +7,10 @@ package team.offer.entity;
  * @Modified By:
  */
 public class Admin {
-    private Integer pkAdministrator_name;
-    private String adminnistratorPassword;
+    private int pkAdministrator_name;
+    private String administratorPassword;
 
-    public Integer getPkAdministrator_name() {
+    public  int getPkAdministrator_name() {
         return pkAdministrator_name;
     }
 
@@ -18,19 +18,19 @@ public class Admin {
         this.pkAdministrator_name = pkAdministrator_name;
     }
 
-    public String getAdminnistratorPassword() {
-        return adminnistratorPassword;
+    public String getAdministratorPassword() {
+        return administratorPassword;
     }
 
-    public void setAdminnistratorPassword(String adminnistratorPassword) {
-        this.adminnistratorPassword = adminnistratorPassword;
+    public void setAdministratorPassword(String administratorPassword) {
+        this.administratorPassword = administratorPassword;
     }
 
     @Override
     public String toString() {
         return "Admin{" +
                 "pkAdministrator_name=" + pkAdministrator_name +
-                ", adminnistratorPassword='" + adminnistratorPassword + '\'' +
+                ", administratorPassword='" + administratorPassword + '\'' +
                 '}';
     }
 }

@@ -1,0 +1,384 @@
+div.containerA
+{
+    margin-left: 5%;
+    width:90%;
+    margin-bottom: 2%;
+
+}
+
+
+div.leftpage
+{
+    margin-top: 2.3%;
+}
+
+div.leftpage div.left_first
+{
+    background-color: white;
+    padding: 3% 5%;
+    margin-bottom: 3%;
+}
+
+div.slogn
+{
+    /*font-size: 35px;*/
+    /*font-weight: 470;*/
+
+    /*color: black;*/
+    font-family: "ProductSans", "PingFangSC-Medium", sans-serif;
+    font-size: 28px;
+    color: #2F3239;
+}
+
+form.jobfind
+{
+    margin:3% 0;
+
+}
+
+div.jobsearchright
+{
+    background-color: #65aaff;
+}
+
+
+button.jobsearch
+{   color: white;
+    background-color: #65aaff;
+    width: 60px;
+    height:20px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-size:15px;
+}
+
+div.leftpage div.left_second
+{
+    background-color: white;
+    margin-bottom: 3%;
+
+}
+
+
+
+
+
+
+
+div.leftpage div.left_second div.onejob
+{
+    box-shadow: 0 1px 0 0 #DAE0E9;
+    padding: 2% 2%;
+    height: 10%;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+div.onejob div.left
+{
+
+    border-right: 2px solid #DAE0E9;
+}
+
+
+div.onejob div.right
+{
+
+}
+
+p.jobname
+{
+
+    font-size:25px;
+    margin-bottom: 4%;
+}
+
+
+
+
+p.jobinfo
+{   font-size: 16px;
+    font-weight: 450;
+    font-family: serif;
+}
+
+span.skills
+{   padding: 3px 5px;
+    color: #9097A5;
+    background: #EDF3F6;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right:10px;
+}
+
+p.skillsline
+{
+    line-height: 24px;
+}
+
+
+span.sign
+{
+    color: #708090;
+    margin-right:3%;
+}
+
+
+
+span.experience
+{
+    margin-right: 10px;
+
+}
+
+p.companyname
+{
+    font-size: 20px;
+    margin-bottom: 3%;
+    font-weight: 350;
+    text-align: right;
+}
+
+p.companyinfo
+{
+    margin-bottom: 3%;
+    font-weight: 450;
+    font-size: 14px;
+    color: #b0b0b0;
+    text-align: right;
+}
+
+p.companyprofit
+{
+    font-weight: 450;
+    font-size: 14px;
+    color: #888;
+    text-align: right;
+}
+
+
+span.collect
+{  font-size:22px;
+    font-weight: 400px;
+    padding-right: 5px;
+    float: right;
+    background-color:#ffffff;
+    color: #888;
+
+}
+
+label.page
+{
+    font-size: 20px;
+    margin-top: 0.5%;
+    font-weight: 350;
+}
+
+input.page{
+
+    height: 30px;
+    margin-top: -1.5%;
+
+}
+
+a.findmorejob
+{
+    color: #17b1f7;
+    letter-spacing: 2px;
+    display: block;
+    text-align: center;
+    font-weight: 400;
+    padding: 2%;
+    text-decoration: none;
+
+}
+
+div.leftpage div.left_three
+{
+    background: white;
+    margin-bottom: 3%;
+
+
+}
+
+
+div.imgsline
+{ line-height: 100px;
+    margin-bottom: 1%;
+    margin-top: 0;
+    margin-left: 1.5%;
+}
+
+img.brand
+{
+    width: 90%;
+    height: 80px;
+    margin-left: 5%
+}
+
+div.rightpage
+{
+    margin-top:5%;
+}
+
+div.rightpage div.right_first
+{
+    height: 400px;
+    background-image: linear-gradient(0deg, #fff 0%, #edf9fe 100%);
+    border-radius: 4px 4px 0 0;
+
+    padding:2% 4%;
+    padding-top: 40px;
+}
+
+img.head
+{
+    height: 150px;
+    margin-bottom: 2%;
+}
+
+div.userinfo
+{
+    font-size: 15px;
+    text-align: center;
+    margin-top: 7%;
+}
+
+span.jobwant
+{
+    font-size: 18px;
+    font-weight: 330;
+    color: #789;
+
+}
+
+span.username
+{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+div.jobwantline
+{
+    margin-top: 5%;
+    text-align: center;
+
+}
+
+div.right_second
+{
+    margin-top: 7%;
+    background-color: white;
+    padding: 4% 2%;
+}
+
+div.welcome
+{
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 3%;
+
+}
+
+img.twocode
+{  margin-top: 4%;
+    margin-left: 9%;
+    height:250px;
+}
+
+/*搜索框样式*/
+.input-group-addon{
+    background-color:#ffffff
+}
+.input-group-addon.jobsearchright {
+    background-color: #07B9F5;
+}
+button.jobsearch.btn.btn-info {
+    background-color: #07B9F5;
+}
+/*全局字体*/
+body {
+    font-family: "ProductSans", "PingFangSC-Medium", sans-serif;
+}
+
+
+.experience {
+    font-family: "PingFangSC-Regular", sans-serif;
+    font-size: 14px;
+    color: #434855;
+}
+span.payment
+{
+    color: #00B9F7;
+    margin-right: 10px;
+}
+/*我的收藏文字+图标*/
+img.collection {
+    width: 20px;
+}
+
+div.heading
+{
+    box-shadow: 0 1px 0 0 #DAE0E9;
+    font-size: 20px;
+    text-align: left;
+    padding:2% 2%;
+    font-family: arial;
+}
+
+div.heading a.mycollection
+{
+    color:#07B9F5;
+    font-size: 18px;
+    float: right;
+    text-decoration: none;
+}
+
+a.joblink
+{
+    font-size:20px;
+    color: #434855;
+    text-decoration: none;
+}
+
+img.heart
+{
+    float: right;
+    width:40px;
+}
+
+/*职位展示*/
+div.leftpage div.left_second
+{
+    background-color: white;
+    margin-bottom: 3%;
+
+}
+
+.col-lg-3 {
+    width: 19%;
+    padding: 0;
+}
+
+.col-lg-6 .leftcontainer {
+    width: 53%;
+}
+
+span.collection_text {
+    font-size: 14px;
+}
+.company{
+    width:150px;
+}
+span.text_1 {
+    margin-left: 18px;
+}
+
+img.daohang_people {
+    width: 20px;
+}
+
+

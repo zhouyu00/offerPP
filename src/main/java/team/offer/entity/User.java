@@ -1,10 +1,18 @@
 package team.offer.entity;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class User {
     private Integer pkUserId;
 
+    @NotEmpty(message="邮箱不能为空")
+    @Email(message="邮箱格式不正确")
     private String userEmail;
 
+    @NotEmpty(message="密码不能为空")
+    @Length(min=6,max=16,message="密码长度必须在6-16之间")
     private String userPassword;
 
     private String userIcon;

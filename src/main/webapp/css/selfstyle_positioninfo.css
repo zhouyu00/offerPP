@@ -1,0 +1,206 @@
+
+div.containerA {
+    margin-left: 5%;
+    width: 90%;
+    margin-bottom: 3%;
+
+}
+
+div.jobinformation {
+    background-color: white;
+    margin-top: 1.5%;
+    padding: 2% 4%;
+    width: 900px;
+
+}
+
+div.leftup {
+    padding-left: 2%;
+    padding-bottom: 2%;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 2%;
+}
+
+div.leftup div.leftcompanyname {
+    font-weight: 300;
+    font-size: 16px;
+    margin-bottom: 2%;
+}
+
+div.leftup div.leftjobname {
+    font-weight: 500;
+    font-size: 28px;
+    margin-bottom: 3%;
+
+}
+
+div.leftup div.leftjobinfo {
+
+    color:#434855;
+    margin-bottom: 2%;
+
+}
+
+div.leftjobinfo span.sign {
+    color: #708090;
+    margin-right: 5px;
+}
+
+div.leftjobinfo span.payment {
+    margin-right: 5px;
+    font-weight: 500;
+    font-family: "ProductSans Bold", "PingFangSC-Medium", sans-serif;
+    font-size: 16px;
+    color: #17b1f7;
+    line-height: 25px;
+    font-weight:bold;
+}
+
+div.leftjobinfo span.baseinfo {
+    font-weight: 400;
+    margin-left: 4%;
+}
+
+div.btnline {
+    height: 50px;
+}
+
+span.iconoff {
+    margin-right: 6%;
+    margin-top: 1%;
+}
+
+span.iconon {
+    margin-right: 6%;
+    margin-top: 1%;
+    color: tomato;
+}
+
+div.leftdown {
+    padding: 0 2%;
+}
+
+div.items {
+    font-weight: 400;
+
+    margin-bottom: 2%;
+    margin-top: 5%;
+
+    font-family: "ProductSans Bold", "PingFangSC-Medium", sans-serif;
+    font-size: 20px;
+    color: #2F3239;
+    line-height: 28px;
+}
+
+span.skills {
+
+    padding: 3px 5px;
+    color: #9097A5;
+    background: #EDF3F6;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+
+}
+
+div.leftdown div.profit {
+    font-size: 16px;
+    font-weight: 400;
+    color: #889;
+
+}
+
+div.leftdown div.introduce {
+    font-size: 16px;
+    font-weight: 300;
+
+}
+
+div.leftdown div.introduce pre {
+    border: 0;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+div.leftdown div.workplace {
+    font-size: 16px;
+    font-weight: 300;
+
+}
+
+div.companyinfomation {
+    height: 300px;
+    margin-left: 4%;
+    background-image: linear-gradient(0deg, #fff 0%, #edf9fe 100%);
+    border-radius: 4px 4px 0 0;
+    margin-top: 5%;
+    padding: 2% 4%;
+    width: 313px;
+
+}
+
+div.rightup {
+    font-size: 18px;
+    font-weight: 400;
+    padding: 6% 8%;
+    color: #17b1f7 !important;
+    border-bottom: 2px solid #ccc;
+    padding-left: 7px;
+}
+
+div.rightdown {
+    margin-top: 6%;
+
+}
+
+div.companyline {
+    font-size: 15px;
+    font-weight: 300;
+    padding-left: 3%;
+    margin-top: 10%;
+}
+
+.toudi {
+    width: 162px;
+    height: 50px;
+    color: white;
+    background-color: #00bfff;
+    border: 0;
+    margin-left: 23px;
+    float: right;
+    font-size: 16px;
+}
+
+.shoucang {
+    width: 130px;
+    height: 50px;
+    margin-left: 4%;
+    float: right;
+    font-size: 16px;
+}
+
+.toudi_tubiao {
+    width: 24px;
+}
+
+.col-lg-7 {
+    width: 52.83333333%;
+}
+
+.position_content{
+    font-family: "PingFangSC-Regular", sans-serif;
+    font-size: 14px;
+    color: #434855;
+}
+img.down {
+    width: 21px;
+}
+
+p{
+    font-family: "PingFangSC-Regular", sans-serif;
+    font-size: 13px;
+    color: #889;
+    line-height: 1.7;
+}
