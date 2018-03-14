@@ -40,7 +40,7 @@ public interface CompanyDao {
     public User getResumeDetails(@Param("pkUserId") Integer pkUserId)throws Exception;
 
     //根据userID更新简历状态
-    public void updateResumeById(@Param("userId") Integer userId, @Param("applicationStatus") Integer applicationStatus)throws Exception;
+    public void updateResumeById(@Param("userId") Integer userId, @Param("pid") Integer pid,@Param("applicationStatus") Integer applicationStatus)throws Exception;
 
     //根据userId查询简历状态
     public Integer getApplicationStatusById(@Param("userId") Integer userId,@Param("pid")Integer pid)throws Exception;
@@ -55,5 +55,8 @@ public interface CompanyDao {
     void deletePositionById(@Param("pkPositionId") Integer pkPositionId)throws Exception;
 
     //根据职位id删除申请
-    void deleteApplicaitonByPositionId(@Param("positionId") Integer positionId)throws Exception;
+    void deleteApplicationByPositionId(@Param("positionId") Integer positionId)throws Exception;
+
+    //完善信息
+    public void completeCompany(@Param("company")Company company) throws Exception;
 }

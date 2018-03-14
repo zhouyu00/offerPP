@@ -29,6 +29,10 @@
     .list-group-item {
         padding-bottom: 18px;
     }
+    .list-group-item.active{
+        background-color: #17b1f7;
+        border-color: #17b1f7;
+    }
 </style>
 
 <c:import url="header.jsp" charEncoding="UTF-8"></c:import>
@@ -99,7 +103,7 @@
             },
             //点击事件
             onPageClicked: function (event, originalEvent, type, page) {
-                location.href = "/company/showResumes.action?page=" + page;
+                location.href = "showResumes.action?page=" + page;
             }
 
         })

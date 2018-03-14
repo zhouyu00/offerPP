@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/admin")
 @SessionAttributes(value={"curAdmin","message"})
-public class AdminController {
+public class    AdminController {
 
     @Autowired
     private AdminService adminService;
@@ -42,11 +42,24 @@ public class AdminController {
 
     //登录
     @RequestMapping(value = "/adminLogin.action", method = RequestMethod.POST)
-    public ModelAndView adminLogin(HttpSession httpSession,@RequestParam("id") int id, @RequestParam("password") String password, Model model) throws Exception {
-        Boolean b = adminService.adminLogin(id, password);
-        ModelAndView mv = new ModelAndView();
-        Admin admin = new Admin();
+    public ModelAndView adminLogin(HttpSession httpSession,HttpServletRequest httpServletRequest, Model model) throws Exception {
         String message = null;
+        String id1=httpServletRequest.getParameter("id");
+        ModelAndView mv = new ModelAndView();
+        int id = 0;
+        String password = httpServletRequest.getParameter("password");
+        if("".equals(id1)||"".equals(password) ){
+            message = "您输入的用户名和密码不能为空";
+            mv.addObject("message", message);
+            mv.setViewName("admin/adminLogin");
+            return mv;
+        }
+        else{
+            id = Integer.valueOf(id1);
+        }
+        Boolean b = adminService.adminLogin(id, password);
+        Admin admin = new Admin();
+
         admin.setPkAdministrator_name(id);
         admin.setAdministratorPassword(password);
         if (b) {
@@ -56,10 +69,12 @@ public class AdminController {
             mv.setViewName("redirect:/admin/userManage.action?page=1");
             return mv;
         }
-        message = "您输入的用户名或者密码错误";
+        else {
+            message = "您输入的用户名或者密码错误";
+        }
         mv.addObject("message",message);
         mv.setViewName("admin/adminLogin");
-        return mv;
+             return mv;
     }
 
     //用户管理
@@ -88,17 +103,30 @@ public class AdminController {
             else
                 page=p;
 
+            int beginIndex;
             //本页起始用户序号
-            int beginIndex = (page - 1) * usersPerPage;
+            if(page!=0) {
+                beginIndex = (page - 1) * usersPerPage;
+            }
+            else
+            {
+                beginIndex = 0;
+            }
             //本页末尾用户序号的下一个
             int endIndex = beginIndex + usersPerPage;
             if (endIndex > totalUsers)
                 endIndex = totalUsers;
+            if(beginIndex == endIndex)
+            {
+                userList = null;
+            }
+            else
+            {
+                userList = userList.subList(beginIndex,endIndex);
+            }
             mv.addObject("totalUsers", totalUsers);
             mv.addObject("usersPerPage", usersPerPage);
             mv.addObject("totalPages", totalPages);
-            mv.addObject("beginIndex", beginIndex);
-            mv.addObject("endIndex", endIndex);
             mv.addObject("page", page);
             mv.addObject("userList", userList);
 
@@ -115,17 +143,10 @@ public class AdminController {
     @RequestMapping("/deleteUser.action")
     public ModelAndView deleteUser(HttpSession httpSession,@RequestParam("id") int id,@RequestParam("page") int page) throws Exception {
         Boolean b = adminService.deleteUser(id);
-//        这里可以放删除以后的逻辑，根据返回值，给管理员提示信息
-//        if (b)
-//            System.out.println("删除成功");
-//        else
-//            System.out.println("删除失败");
+
 
         ModelAndView mv = new ModelAndView();
-//        String message = null;
-//        message = "删除成功";
-//        httpSession.setAttribute("message",message);
-//        mv.addObject("message",message);
+
         mv.setViewName("redirect:/admin/userManage.action?page="+String.valueOf(page));
         return mv;
     }
@@ -154,12 +175,27 @@ public class AdminController {
             else
                 page=p;
 
+            int beginIndex;
             //本页起始用户序号
-            int beginIndex = (page - 1) * comsPerPage;
+            if(page!=0) {
+                beginIndex = (page - 1) * comsPerPage;
+            }
+            else
+            {
+                beginIndex = 0;
+            }
             //本页末尾用户序号的下一个
             int endIndex = beginIndex + comsPerPage;
             if (endIndex > totalComs)
                 endIndex = totalComs;
+            if(beginIndex == endIndex)
+            {
+                companyList = null;
+            }
+            else
+            {
+                companyList = companyList.subList(beginIndex,endIndex);
+            }
             mv.addObject("totalComs", totalComs);
             mv.addObject("comsPerPage", comsPerPage);
             mv.addObject("totalPages", totalPages);
@@ -177,6 +213,7 @@ public class AdminController {
             return mv;
         }
     }
+
 
     //修改企业的注册状态
     @RequestMapping("/modifyCompanyPass.action")
@@ -238,20 +275,16 @@ public class AdminController {
 
     //修改企业发布岗位上限
     @RequestMapping(value = "/setPositionLimit.action", produces = "application/json;charset=UTF-8")
-    public ModelAndView setPositionLimit(HttpSession httpSession,@RequestParam("id") int id, @RequestParam("limit") int value,@RequestParam("page") int page) throws Exception {
-//        String message = null;
+    public ModelAndView setPositionLimit(HttpSession httpSession,@RequestParam("id") int id, HttpServletRequest httpServletRequest,@RequestParam("page") int page) throws Exception {
         ModelAndView mv = new ModelAndView();
-//        if(!"".equals(String.valueOf(value))&&value>5&&value<100) {
+        String value1 = httpServletRequest.getParameter("limit");
+        int value = 0;
+        if(!"".equals(value1)) {
+            value = Integer.valueOf(value1);
+        }
+        if(value != 0) {
             Boolean b = adminService.setPositionLimit(value, id);
-//      这里可以放修改企业发布岗位上限以后的以后的逻辑，根据返回值，给管理员提示信息
-//            message = "设置成功";
-//        }
-//        else
-//        {
-//            message = "请输入有效的上限数(6~99)";
-//        }
-//        httpSession.setAttribute("message",message);
-//        System.out.println((String)httpSession.getAttribute("message"));
+        }
         mv.setViewName("redirect:/admin/positionLimitManage.action?page="+String.valueOf(page));
         return mv;
     }

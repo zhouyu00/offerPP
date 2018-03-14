@@ -108,9 +108,9 @@ public class CompanyServiceImpl implements CompanyService{
 
 
     //根据userid通知面试
-    public boolean passResume(Integer userId){
+    public boolean passResume(Integer userId,Integer pid){
         try {
-            companyDao.updateResumeById(userId,1);
+            companyDao.updateResumeById(userId,pid,1);
         } catch (Exception e) {
             return false;
         }
@@ -118,9 +118,9 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     //根据userId拒绝申请
-    public boolean refuseResume(Integer userId){
+    public boolean refuseResume(Integer userId,Integer pid){
         try {
-            companyDao.updateResumeById(userId,-1);
+            companyDao.updateResumeById(userId,pid,-1);
         } catch (Exception e) {
             return false;
         }
@@ -146,9 +146,14 @@ public class CompanyServiceImpl implements CompanyService{
 
     //删除职位根据职位id
     public void deletePosition(Integer pkPositionId)throws Exception{
-        companyDao.deleteApplicaitonByPositionId(pkPositionId);
+        companyDao.deleteApplicationByPositionId(pkPositionId);
        companyDao.deletePositionById(pkPositionId);
 
+    }
+
+    //完善公司信息
+    public void completeCompany(Company company)throws Exception{
+        companyDao.completeCompany(company);
     }
 
 

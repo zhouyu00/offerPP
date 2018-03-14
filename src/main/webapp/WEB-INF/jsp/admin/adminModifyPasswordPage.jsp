@@ -21,8 +21,7 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header navbar-nav navbar-left">
-            <img src="<%= basePath %>img/1489386486
-            003.jpeg" height="10" width="100" class="img-circle img-thumbnail">
+            <img src="<%= basePath %>img/1489386486003.jpeg" height="10" width="100" class="img-circle img-thumbnail">
         </div>
         <div>
             <ul class="nav navbar-nav navbar-right">
@@ -38,7 +37,7 @@
                         <li><a href="${basePath}positionLimitManage.action?page=1">企业岗位审核</a></li>
                     </ul>
                 </li>
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         管理员
                         <b class="caret"></b>
@@ -53,6 +52,7 @@
         </div>
     </div>
 </nav>
+
 
 <div class="container">
     <div class="row" style="margin-bottom: 5%;">

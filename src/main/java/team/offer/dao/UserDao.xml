@@ -13,14 +13,14 @@
 
     <!--根据邮箱获取用户信息-->
     <select id="queryUserByEmail" parameterType="String" resultType="User">
-        select pk_user_id,user_email,user_password,user_name,user_phone,user_age from user
+        select * from user
         where user_email=#{email}
     </select>
 
     <!--增加一条用户记录-->
     <insert id="insertUser" parameterType="User">
-        insert into user(user_email,user_password)
-        values(#{userEmail},#{userPassword})
+        insert into user(user_email,user_password,user_name)
+        values(#{userEmail},#{userPassword},#{userName})
     </insert>
 
     <!--更新用户上线时间-->

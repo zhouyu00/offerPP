@@ -12,7 +12,7 @@
 </head>
 <body>
 <link rel="stylesheet" href="<%= basePath %>css/bootstrapdj.min.css">
-<script src="<%= basePath %>jQuery/jquerydj-3.3.1.min.js"></script>
+<script src="<%= basePath %>js/jquerydj-3.3.1.min.js"></script>
 <script src="<%= basePath %>js/bootstrapdj.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%= basePath %>css/zzhsj.css" >
 <style>
@@ -31,8 +31,8 @@
         </div>
         <div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="${basePath}userManage.action?page=1">用户管理</a></li>
-                <li class="dropdown active">
+                <li ><a href="${basePath}userManage.action?page=1">用户管理</a></li>
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         企业管理
                         <b class="caret"></b>
@@ -66,10 +66,8 @@
                 <c:set var="totalComs" value="${requestScope.totalComs}"/>
                 <c:set var="comsPerPage" value="${requestScope.comsPerPage}"/>
                 <c:set var="totalPages" value="${requestScope.totalPages}"/>
-                <c:set var="beginIndex" value="${requestScope.beginIndex}"/>
-                <c:set var="endIndex" value="${requestScope.endIndex}"/>
                 <c:set var="page" value="${requestScope.page}"/>
-                <c:set var="currentPageComs" value="${requestScope.companyList.subList(beginIndex,endIndex)}"/>
+                <c:set var="currentPageComs" value="${requestScope.companyList}"/>
 
                 <table class="table table-hover">
                     <thead>
@@ -81,25 +79,25 @@
                     </tr>
                     </thead>
                     <tbody>
-
-                    <c:forEach items="${currentPageComs}" var="company">
-                    <tr>
-                    <td>${company.comNo}</td>
-                    <td>${company.comName}</td>
-                    <td>${company.comLegalperson}</td>
-                    <td>
-                    <a href="${basePath}modifyCompanyPass.action?id=${company.pkComId}&&value=1&&page=${page}">通过</a>
-                    <a href="${basePath}modifyCompanyPass.action?id=${company.pkComId}&&value=-1&&page=${page}">拒绝</a>
-                    </td>
-                    </tr>
-                    </c:forEach>
+                    <c:if test="${currentPageComs!= null}">
+                        <c:forEach items="${currentPageComs}" var="company">
+                            <tr>
+                                <td>${company.comNo}</td>
+                                <td>${company.comName}</td>
+                                <td>${company.comLegalperson}</td>
+                                <td>
+                                    <a href="${basePath}modifyCompanyPass.action?id=${company.pkComId}&&value=1&&page=${page}">通过</a>
+                                    <a href="${basePath}modifyCompanyPass.action?id=${company.pkComId}&&value=-1&&page=${page}">拒绝</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="text-center">
     <nav>
@@ -120,7 +118,6 @@
         </ul>
     </nav>
 </div>
-
 <footer>
     <div class="container">
         <div class="row">

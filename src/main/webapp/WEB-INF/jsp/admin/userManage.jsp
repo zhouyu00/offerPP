@@ -66,10 +66,8 @@
                 <c:set var="totalUsers" value="${requestScope.totalUsers}"/>
                 <c:set var="usersPerPage" value="${requestScope.usersPerPage}"/>
                 <c:set var="totalPages" value="${requestScope.totalPages}"/>
-                <c:set var="beginIndex" value="${requestScope.beginIndex}"/>
-                <c:set var="endIndex" value="${requestScope.endIndex}"/>
                 <c:set var="page" value="${requestScope.page}"/>
-                <c:set var="currentPageUsers" value="${requestScope.userList.subList(beginIndex,endIndex)}"/>
+                <c:set var="currentPageUsers" value="${requestScope.userList}"/>
 
                 <table class="table table-hover">
                     <thead>
@@ -80,16 +78,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${currentPageUsers}" var="user">
-                    <tr>
-                    <td>${user.userEmail}</td>
-                    <td>${user.userName}</td>
-                    <td>
-                    <a href="${basePath}deleteUser.action?page=${page}&&id=${user.pkUserId}">删除</a>
-                    </td>
-                    </tr>
-                    </c:forEach>
-
+                    <c:if test="${currentPageUsers!=null}">
+                        <c:forEach items="${currentPageUsers}" var="user">
+                            <tr>
+                                <td>${user.userEmail}</td>
+                                <td>${user.userName}</td>
+                                <td>
+                                    <a href="${basePath}deleteUser.action?page=${page}&&id=${user.pkUserId}">删除</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
                     </tbody>
                 </table>
             </div>

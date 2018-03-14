@@ -88,17 +88,92 @@ public class CompanyController {
 
     //根据currCompany显示公司的详细信息
     @RequestMapping("/showCurrComDetails.action")
-    public String showCurrComDetails(HttpSession session){
+    public Object showCurrComDetails(HttpServletRequest request){
         try {
-            Company currCompany= (Company) session.getAttribute("currCompany");
+            Company currCompany= (Company) request.getSession().getAttribute("currCompany");
+            Company company = companyService.getCompanyById(currCompany.getPkComId());
+            request.getSession().setAttribute("currCompany",company);
+            ModelAndView mv = new ModelAndView("company/company_top");
             if(currCompany!=null){
-                return "company/company_top";
+                mv.addObject("company",company);
+                return mv;
+                //return "company/company_top";
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "redirect:/company/signCompany.action";
+    }
+
+    //完善公司详情验证
+    @RequestMapping(value="completeCompany.action",method=RequestMethod.POST)
+    @ResponseBody
+    public Object completeCompany(Company company,HttpServletRequest request)throws Exception{
+        Map<String,String> map = new HashMap<String, String>();
+        int currComId= company.getPkComId();
+
+        Company currCompany =companyService.getCompanyById(currComId);
+        System.out.println("修改前"+currCompany);
+        //联系方式
+        //所属行业
+        //公司地址
+        //公司规模
+        //公司简介
+        String comContact = company.getComContact();
+        String comIndustry = company.getComIndustry();
+        String comLocation = company.getComLocation();
+        String comSize = company.getComSize();
+        String comIntro = company.getComIntro();
+        currCompany.setComContact(comContact);
+        currCompany.setComIndustry(comIndustry);
+        currCompany.setComLocation(comLocation);
+        currCompany.setComSize(comSize);
+        currCompany.setComIntro(comIntro);
+        //修改company
+        companyService.completeCompany(currCompany);
+
+        //修改验证
+        Company reviseCompany = companyService.getCompanyById(currComId);
+
+        System.out.println("修改后："+reviseCompany);
+
+        String reviseContact = reviseCompany.getComContact();
+        String reviseIndustry = reviseCompany.getComIndustry();
+        String reviseLocation = reviseCompany.getComLocation();
+        String reviseSize = reviseCompany.getComSize();
+        String reviseIntro = reviseCompany.getComIntro();
+        if(!reviseContact.equals(comContact)){
+            map.put("result","ContactUpdateError");
+            return map;
+        }
+        else if(!reviseIndustry.equals(comIndustry)){
+            map.put("result","IndustryUpdateError");
+            return map;
+        }
+        else if(!reviseLocation.equals(comLocation)){
+            map.put("result","LocationUpdateError");
+            return map;
+        }
+        else if(!reviseSize.equals(comSize)){
+            map.put("result","SizeUpdateError");
+            return map;
+        }
+        else if(!reviseIntro.equals(comIntro)){
+            map.put("result","IntroUpdateError");
+            return map;
+        }
+        else{
+            request.getSession().setAttribute("currCompany",reviseCompany);
+            map.put("comContact",reviseContact);
+            map.put("comIndustry",reviseIndustry);
+            map.put("comLocation",reviseLocation);
+            map.put("comSize",reviseSize);
+            map.put("comIntro",reviseIntro);
+            map.put("result","completeOK");
+            return map;
+        }
+
 
     }
     //-------------------------------发送邮件验证------------------------//
@@ -235,8 +310,13 @@ public class CompanyController {
         else if(!password.equals(company.getComPassword())){
             map.put("result","passwordError");
         }else{
-            model.addAttribute("currCompany",company);
-            map.put("result","ok");
+            if(company.getComPass()==0){
+                map.put("result","NoPass");
+            }
+            else {
+                model.addAttribute("currCompany", company);
+                map.put("result", "ok");
+            }
         }
         return map;
     }
@@ -341,7 +421,7 @@ public class CompanyController {
 
         ModelAndView mv = new ModelAndView("company/company_job");
         page=page==null?1:page;
-        PageHelper.startPage(page,3);
+        PageHelper.startPage(page,4);
         int comId=currCompany.getPkComId();
         List<Position> positionList = companyService.queryPositionByComId(comId);
         PageInfo<Position> positionPageInfo=new PageInfo<Position>(positionList);
@@ -398,7 +478,7 @@ public class CompanyController {
     public ModelAndView showResumes(@RequestParam(required=false)Integer page,@ModelAttribute("currCompany")Company currCompany){
         ModelAndView mv= new ModelAndView("company/company_res_position");
         page=page==null?1:page;
-        PageHelper.startPage(page,3);
+        PageHelper.startPage(page,4);
         int comId = currCompany.getPkComId();
         List<Position> positionList = null;
         try {
@@ -452,7 +532,7 @@ public class CompanyController {
         System.out.print(pkPositionId);
         Map<String,String> map= new HashMap<String,String>();
         try {
-            companyService.passResume(userId);
+            companyService.passResume(userId,pkPositionId);
             //修改简历状态后验证
             int status = companyService.getApplicationStatusById(userId,pkPositionId);
             if(status==1){
@@ -477,7 +557,7 @@ public class CompanyController {
         System.out.print(pkPositionId);
         try {
             //修改简历状态后验证
-            companyService.refuseResume(userId);
+            companyService.refuseResume(userId,pkPositionId);
             int status = companyService.getApplicationStatusById(userId,pkPositionId);
             System.out.println(status);
             if(status==-1){

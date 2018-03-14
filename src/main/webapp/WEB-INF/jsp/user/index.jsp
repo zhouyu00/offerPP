@@ -22,9 +22,9 @@
             <div class="leftpage">
 
                 <div class="left_first">
-                    <div class="slogn">最好的人才,</div>
+                    <div class="slogn">让最好的人才,</div>
                     <br>
-                    <div class="slogn">遇见更好的机会</div>
+                    <div class="slogn">遇见合适的机会</div>
 
                     <form class="jobfind" action="${pageContext.request.contextPath}/position/query.action" method="post">
                         <div class="input-group input-group-lg">
@@ -190,7 +190,7 @@
                 <div class="right_first">
                     <div class="row">
                         <div class="col-md-4 col-lg-4 col-md-offset-3 col-md-offset-3">
-                            <img src="<c:url value="/img/touxiang.jpg"/>" class="head img-circle" id="head">
+                            <img src="/pic/${user.userIcon}" class="head img-circle" id="head">
                         </div>
                     </div>
 
@@ -200,17 +200,10 @@
 
                     <div class="jobwantline">
                         <span class="jobwant">${user.userStation}</span>
-                        <span class="jobwant">安全工程师</span>
                     </div>
 
-
-                    <%--<div class="userinfo">--%>
-                        <%--<span class="glyphicon glyphicon-briefcase"></span>--%>
-                        <%--微软后端工程师一年--%>
-                    <%--</div>--%>
-
                     <div class="userinfo">
-                        <span class="glyphicon glyphicon-map-marker"></span>${user.userAddressCountry},${user.userAddressCity}
+                        <span class="glyphicon glyphicon-map-marker"></span>${user.userAddressCity}
                     </div>
 
                     <div class="userinfo">

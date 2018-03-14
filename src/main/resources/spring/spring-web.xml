@@ -41,4 +41,13 @@
 
     <!--4.使用spring组件扫描，一次性配置此包下所有Handler-->
     <context:component-scan base-package="team.offer.web"/>
+
+    <!--5.配置上传文件-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件的最大尺寸为5MB -->
+        <property name="maxUploadSize">
+            <value>5242880</value>
+        </property>
+    </bean>
 </beans>

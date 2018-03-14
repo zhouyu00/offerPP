@@ -12,7 +12,9 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header navbar-nav navbar-left">
-            <img src="<c:url value="/img/1489386486003.jpeg"/>" height="10" width="100" class="img-circle img-thumbnail">
+            <div class="navbar-brand brand">
+                <img src="<c:url value="/img/title.png"/>">
+            </div>
         </div>
 
         <div>
@@ -27,7 +29,6 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="./changeComPassword.action">修改密码</a></li>
-                        <li class="divider"></li>
                         <li><a href="./companySignOut.action">退出</a></li>
                     </ul>
                 </li>

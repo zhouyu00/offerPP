@@ -127,9 +127,9 @@
             <div class="col-md-2 col-lg-2"></div>
             <div class="col-md-4 col-lg-4">
             <div class="banner-title">
-                让更好的人才
+                让IT人才
                 <br>
-                遇见更好的机会
+                遇见合适的机会
             </div>
                 <div class="blue-spliter"></div>
             <div class="content_index">遇见互联网技术、产品、设计、数据等职位的优质机会</div>

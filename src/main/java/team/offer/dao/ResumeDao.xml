@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.offer.dao.ResumeDao">
+    <!--ResumeMap-->
+    <!--<resultMap id="ResumeMap" type="team.offer.entity.User">-->
+    <!--<id property="pkComId" column="pk_com_id"/>-->
+    <!--<result property="comNo" column="com_no"/>-->
+    <!--<result property="comEmail" column="com_email"/>-->
+    <!--<result property="comPassword" column="com_password"/>-->
+    <!--<result property="comName" column="com_name"/>-->
+    <!--<result property="comIndustry" column="com_industry"/>-->
+    <!--<result property="comLocation" column="com_location"/>-->
+    <!--<result property="comSize" column="com_size"/>-->
+    <!--<result property="comLegalperson" column="com_legalperson"/>-->
+    <!--<result property="comIntro" column="com_intro"/>-->
+    <!--<result property="comContact" column="com_contact"/>-->
+    <!--<result property="comPostlimit" column="com_postlimit"/>-->
+    <!--<result property="comPass" column="com_pass"/>-->
+    <!--</resultMap>-->
+
+    <sql id="personalCols">
+        user_icon
+        userName
+        user_phone
+        user_age
+        user_address_country
+        user_address_city
+        user_direction
+        user_station
+        user_experience
+        user_skill
+        user_work_address
+        user_education
+        user_work_experience
+        user_introduction
+    </sql>
+
+    <sql id="personalInformation">
+        user_icon
+        user_name
+        user_phone
+        user_age
+        user_address_country
+        user_address_city
+    </sql>
+
+    <sql id="careerException">
+        user_direction
+        user_station
+        <!--期望的工作地点-->
+        user_work_address
+    </sql>
+
+
+
+    <sql id="skillsInformation">
+        <!--工作经验-->
+        user_experience
+        <!--工作技能-->
+        user_skill
+    </sql>
+
+    <sql id="careerAndEducationExp">
+        user_education
+        user_work_experience
+    </sql>
+
+    <update id="setPersonalInformationById" parameterType="team.offer.entity.User">
+        update user set
+        user_icon=#{userIcon},
+        user_email=#{userEmail},
+        user_name=#{userName},
+        user_phone=#{userPhone},
+        user_age=#{userAge},
+        user_address_country=#{userAddressCountry},
+        user_address_city=#{userAddressCity}
+        where pk_user_id=#{pkUserId}
+    </update>
+
+    <!--<update id="setPersonalInformationById" parameterType="team.offer.entity.User">
+        update user set
+
+        user_name=#{userName},
+        user_phone=#{userPhone}
+
+
+        where pk_user_id=#{pkUserId}
+    </update>-->
+
+    <select id="getPersonalInformationById" parameterType="int"
+            resultType="team.offer.entity.User">
+        select *
+        from user
+        where pk_user_id=#{pkUserId}
+    </select>
+    <!--
+        <update id="setCareerExceptionById" parameterType="team.offer.entity.User">
+            update user set
+            user_direction=#{userDirection},
+            user_station=#{userStation},
+            user_work_address=#{userWorkAddress},
+            user_experience=#{userExperience},
+            user_skill=#{userSkill}
+            where pk_user_id=#{pkUserId}
+        </update>
+
+        <select id="getCareerExceptionById" parameterType="int"
+                resultType="team.offer.entity.User">
+            select *
+            from user
+            where pk_user_id=#{pkUserId}
+        </select>
+    -->
+        <update id="setSkillsInformationById" parameterType="team.offer.entity.User">
+            update user set
+            user_direction=#{userDirection},
+            user_station=#{userStation},
+            user_work_address=#{userWorkAddress},
+            user_experience=#{userExperience},
+            user_skill=#{userSkill}
+            where pk_user_id=#{pkUserId}
+        </update>
+
+        <select id="getSkillsInformationById" parameterType="int"
+                resultType="team.offer.entity.User">
+            select *
+            from user
+            where pk_user_id=#{pkUserId}
+        </select>
+
+    <update id="setCareerAndEducationExpById" parameterType="team.offer.entity.User">
+        update user set
+        user_edu_experience=#{userEduExperience},
+        user_work_experience=#{userWorkExperience},
+        user_education=#{userEducation}
+        where pk_user_id=#{pkUserId}
+    </update>
+
+    <select id="getCareerAndEducationExpById" parameterType="int"
+            resultType="team.offer.entity.User">
+        select *
+        from user
+        where pk_user_id=#{pkUserId}
+    </select>
+
+    <update id="setPersonalDescriptionById" parameterType="team.offer.entity.User">
+        update user set
+        user_introduction=#{userIntroduction}
+        where pk_user_id=#{pkUserId}
+    </update>
+
+    <select id="getPersonalDescriptionById" parameterType="int"
+            resultType="team.offer.entity.User">
+        select *
+        from user
+        where pk_user_id=#{pkUserId}
+    </select>
+
+    <select id="queryResumeInformationById" parameterType="int"
+            resultType="team.offer.entity.User">
+        select * from user
+        where pk_user_id=#{id}
+    </select>
+</mapper>

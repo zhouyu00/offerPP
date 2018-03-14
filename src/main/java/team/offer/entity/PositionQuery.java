@@ -43,6 +43,8 @@ public class PositionQuery {
 
     private String[] skills;
 
+    private String positionAddress;
+
     public Integer getDeliverFlag() {
         return deliverFlag;
     }
@@ -202,6 +204,15 @@ public class PositionQuery {
     public void setSkills(String[] skills) {
         this.skills = skills;
     }
+
+    public String getPositionAddress() {
+        return positionAddress;
+    }
+
+    public void setPositionAddress(String positionAddress) {
+        this.positionAddress = positionAddress;
+    }
+
     @Override
     public String toString() {
         return "PositionQuery{" +

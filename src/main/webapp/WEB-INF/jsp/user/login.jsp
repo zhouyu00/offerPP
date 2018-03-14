@@ -83,6 +83,7 @@
                 <div class="form-group">
                     <label for="inputEmail">账号</label>
                     <input type="text" class="form-control" id="comEmail" placeholder="账号" name="email">
+                    <p hidden id="NoPass" class="backVerify">公司注册未审核</p>
                     <p hidden id="NoSuchCompany" class="backVerify">邮箱未注册</p>
                     <p hidden id="emailNullError" class="frontVerify">邮箱不能为空</p>
                     <p hidden id="emailRegixError" class="frontVerity">邮箱格式不正确</p>
@@ -95,7 +96,7 @@
                 </div>
                 <div class="checkbox">
                     <div class="fl"><label><input type="checkbox"> 记住我</label></div>
-                    <div class="fr"><a href="./findComPassword.action">忘记密码?</a></div>
+                    <div class="fr"><a href="${pageContext.request.contextPath}/company/findComPassword.action">忘记密码?</a></div>
                 </div>
                 <button type="button" class="btn btn-primary btn-block" id="hrbutton">确定</button>
                 <%--<button type="submit" class="btn btn-primary btn-block" formaction="./companySignIn.action" formmethod="post">确定</button>--%>
@@ -122,9 +123,6 @@
             increaseArea: '20%'
         });
 
-        <%--if (${remember==1}) {--%>
-            <%--$("#r1").attr("checked", true);--%>
-        <%--}--%>
         if (${remember==1}) {
             $("#r1").iCheck('check');
         }
@@ -135,6 +133,16 @@
                 message: "登录账号或密码不正确"
             });
         }
+        var comRemCheck=${comRemCheck==1}?1:0;
+
+        if(comRemCheck==1)
+        {
+            $("#comRemMe").prop("checked",true);
+        }
+        else{
+
+            $("#comRemMe").prop("checked",false);
+        }
 
         $('#hrbutton').click(function () {
             $(".backVerify").hide();
@@ -142,7 +150,6 @@
             var reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
             var email = $('#comEmail').val();
             var password = $('#comPassword').val();
-
             if (email.length == 0) {
                 $('#emailNullError').show();
             }
@@ -153,20 +160,32 @@
                 $('#passNullError').show();
             }
             else {
+                if($("#comRemMe").is("checked")){
+                    comRemCheck=1;
+                }
+                else{
+                    comRemCheck=0;
+                }
+                console.log(comRemCheck);
                 $.post(
                     "${pageContext.request.contextPath}/company/companySignIn.action",
                     {
                         email: email,
-                        password: password
+                        password: password,
+                        comRemCheck:comRemCheck
                     },
                     function (data) {
                         if (data.result == "NoSuchCompany") {
                             $('#NoSuchCompany').show();
                         }
                         else if (data.result == 'passwordError') {
-                            $('#passwordError').show()
+                            $('#passwordError').show();
+                        }
+                        else if(data.result=='passError'){
+                            alert("公司尚未通过管理员审核");
                         }
                         else if (data.result == 'ok') {
+
                             window.location.href = "${pageContext.request.contextPath}/company/showCurrComDetails.action";
                         }
                         else {

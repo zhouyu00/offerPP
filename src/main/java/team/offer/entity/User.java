@@ -17,6 +17,7 @@ public class User {
 
     private String userIcon;
 
+    @NotEmpty(message="姓名不能为空")
     private String userName;
 
     private String userPhone;
@@ -46,6 +47,16 @@ public class User {
     private Boolean userTop;
 
     private long userLastLogin;
+
+    private String userEduExperience;
+
+    public String getUserEduExperience() {
+        return userEduExperience;
+    }
+
+    public void setUserEduExperience(String userEduExperience) {
+        this.userEduExperience = userEduExperience;
+    }
 
     public Integer getPkUserId() {
         return pkUserId;
