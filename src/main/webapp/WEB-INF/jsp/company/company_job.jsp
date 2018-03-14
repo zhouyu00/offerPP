@@ -26,6 +26,10 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    .btn-info{
+        background-color:#17b1f7;
+    }
 </style>
 
 <c:import url="header.jsp" charEncoding="UTF-8"></c:import>
@@ -95,7 +99,7 @@
         },
         //点击事件
         onPageClicked: function (event, originalEvent, type, page) {
-            location.href = "/company/showPositions.action?page=" + page;
+            location.href = "showPositions.action?page=" + page;
         }
 
     })

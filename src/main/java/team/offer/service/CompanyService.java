@@ -37,9 +37,9 @@ public interface CompanyService {
 
     public User getResumeDetails(Integer pkUserId)throws Exception;
 
-    public boolean passResume(Integer userId)throws Exception;
+    public boolean passResume(Integer userId,Integer pid)throws Exception;
 
-    public boolean refuseResume(Integer userId)throws Exception;
+    public boolean refuseResume(Integer userId,Integer pid)throws Exception;
 
     public int getApplicationStatusById(Integer userId,Integer pid)throws Exception;
 
@@ -52,4 +52,6 @@ public interface CompanyService {
     //根据职位id删除职位及申请
     void deletePosition(Integer pkPositionId)throws Exception;
 
+    //完善公司信息
+    public void completeCompany(Company company)throws Exception;
 }

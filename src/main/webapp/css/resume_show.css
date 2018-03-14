@@ -1,5 +1,6 @@
 .sj-main-container {
     color: #777777;
+
 }
 
 .sj-main-container h1 {
@@ -22,7 +23,7 @@
 }
 
 .sj-info-container img {
-    height: 130px;
+
 }
 
 /*.sj-info {*/
@@ -47,3 +48,4 @@
 .sj-exp {
     min-height: 100px;
 }
+

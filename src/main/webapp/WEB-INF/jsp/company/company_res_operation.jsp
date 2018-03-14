@@ -1,4 +1,3 @@
-
 <%--
   Created by IntelliJ IDEA.
   User: DuJie
@@ -8,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page isELIgnored="false"%>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <title>简历管理</title>
@@ -32,6 +31,54 @@
         margin-left: 170px;
     }
 
+    div#conteainer {
+        padding-top: 20px;
+        padding-left: 30px;
+    }
+
+    body {
+        background: #EDEDEF;
+    }
+
+    .content {
+        padding-top: 30px;
+        padding-left: 30px;
+    }
+    .content_ul{
+        padding-top:30px;
+        padding-left:0px;
+    }
+
+    li.content_li {
+        padding-bottom: 10px;
+    }
+    li{
+        list-style:none
+    }
+
+    .col-md-push-8 {
+        left: 66.66666667%;
+        padding-left: 0px;
+    }
+
+    .btn-danger {
+        margin-left: 15px;
+    }
+
+    #yulan {
+        background-color: #EDEDEF;
+        padding-left: 0px;
+    }
+
+    .preview-label {
+        display: inline-block;
+        width: 60%;
+        font-size: 20px;
+        color: #666666;
+        height: 50px;
+        line-height: 50px;
+
+    }
 </style>
 
 <c:import url="header.jsp" charEncoding="UTF-8"></c:import>
@@ -39,8 +86,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-push-8">
-            <button type="button" class="btn btn-info" id="ResumePass">简历通过</button>
-            <button type="button" class="btn btn-info" id="ResumeReject">简历驳回</button>
+            <button type="button" class="btn btn-success tongguo" id="ResumePass">简历通过</button>
+            <button type="button" class="btn btn-danger bohui" id="ResumeReject">简历驳回</button>
         </div>
     </div>
 </div>
@@ -49,9 +96,9 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8 sj-main-container">
-            <h1>简历浏览</h1>
-            <div class="sj-info-container">
-                <img src="${user.userIcon}" class="fl"/>
+            <div class="preview-label" id="yulan">简历预览</div>
+            <div class="sj-info-container" id="conteainer">
+                <img src="/pic/${user.userIcon}" class="fl" width="120" height="114"/>
                 <div class="sj-info">
                     <h2>${user.userName}</h2>
                     <p>${user.userAge}岁 现居${user.userAddressCity},${user.userAddressCountry}</p>
@@ -61,30 +108,41 @@
             </div>
             <div class="sj-about">
                 <h2>关于我</h2>
-                <ul>
-                    <li>职业技能：${user.userSkill}</li>
-                    <li>职业方向：${user.userDirection}</li>
-                    <li>期望工作地：${user.userWorkAddress}</li>
-                </ul>
+                <div class="content_ul">
+                    <ul>
+                        <li class="content_li">职业方向：${user.userDirection}</li>
+                        <li class="content_li">工作经验：${user.userExperience}</li>
+                        <li class="content_li">求职岗位：${user.userStation}</li>
+                        <li class="content_li">职业仅能：${user.userSkill}</li>
+                    </ul>
+                </div>
             </div>
             <div class="sj-skill">
-                <%--<div class="sj-skill-content" align="">--%>
-                    <h2>工作经验</h2>
+
+                <h2>工作经验</h2>
+                <div class="content">
                     <p>${user.userStation}</p>
-                    <p>${user.userExperience}年</p>
-                <%--</div>--%>
+                    <p>${user.userExperience}</p>
+                </div>
+
             </div>
             <div class="sj-exp sj-work">
                 <h2>工作经历</h2>
-                <p>${user.userWorkExperience}</p>
+                <div class="content">
+                    <p>${user.userWorkExperience}</p>
+                </div>
             </div>
             <div class="sj-exp sj-education">
                 <h2>教育经历</h2>
-                <p>${user.userEducation}</p>
+                <div class="content">
+                    <p>${user.userEduExperience}</p>
+                </div>
             </div>
             <div class="sj-self-intro">
                 <h2>个人描述</h2>
-                <p>${user.userIntroduction}</p>
+                <div class="content">
+                    <p>${user.userIntroduction}</p>
+                </div>
             </div>
 
         </div>

@@ -52,6 +52,7 @@
         user.user_education,
         user.user_work_experience,
         user.user_introduction,
+        user.user_edu_experience,
         user.user_top
     </sql>
 
@@ -82,7 +83,7 @@
         #{company.comIntro},
         #{company.comContact},
         10,
-        #{company.comPass}
+        0
         );
     </insert>
 
@@ -143,7 +144,7 @@
     <update id="updateResumeById">
         update application
         set application_status=#{applicationStatus}
-        where user_id=#{userId}
+        where user_id=#{userId} and position_id=#{pid}
     </update>
 
     <!--根据userid查询简历状态-->
@@ -163,7 +164,8 @@
         position_salary,
         position_welfare,
         position_introduction,
-        position_skill
+        position_skill,
+        position_address
     </sql>
 
     <!--增加新职位-->
@@ -183,7 +185,8 @@
         #{positionSalary},
         #{positionWelfare},
         #{positionIntroduction},
-        #{positionSkill}
+        #{positionSkill},
+        #{positionAddress}
         )
     </insert>
 
@@ -209,4 +212,16 @@
         application
         WHERE position_id=#{positionId}
     </delete>
+
+    <!--完善公司信息-->
+    <update id="completeCompany" parameterType="company">
+        update company
+        SET
+        com_industry =#{company.comIndustry},
+        com_location =#{company.comLocation},
+        com_size =#{company.comSize},
+        com_contact=#{company.comContact},
+        com_intro=#{company.comIntro}
+        where pk_com_id=#{company.pkComId}
+    </update>
 </mapper>

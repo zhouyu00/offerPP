@@ -28,7 +28,7 @@ public class Company {
 
     private String comLocation;
 
-    private Integer comSize;
+    private String comSize;
 
     private String comLegalperson;
 
@@ -96,11 +96,11 @@ public class Company {
         this.comLocation = comLocation == null ? null : comLocation.trim();
     }
 
-    public Integer getComSize() {
+    public String getComSize() {
         return comSize;
     }
 
-    public void setComSize(Integer comSize) {
+    public void setComSize(String comSize) {
         this.comSize = comSize;
     }
 

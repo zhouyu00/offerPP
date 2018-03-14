@@ -17,6 +17,9 @@ public interface UserService {
     //获取个人详细信息
     User findUserById(Integer id) throws Exception;
 
+    //获取个人详细信息
+    User findUserByEmail(String email) throws Exception;
+
     //用户注册
     boolean register(User user) throws Exception;
 

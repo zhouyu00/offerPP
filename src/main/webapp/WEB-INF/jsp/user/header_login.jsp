@@ -12,7 +12,6 @@
     <div class="navbar-header">
         <div class="navbar-brand brand">
             <img src="<c:url value="/img/title.png"/>">
-            <%--<b style="font-size: 25px;float: left;margin-top:1px;margin-left: 360px;color: #07B9F5">Offer++</b>--%>
         </div>
     </div>
 
@@ -33,7 +32,7 @@
             </ul>
         </li>
 
-        <li><a class="daohang_text" href="#">简历管理</a></li>
+        <li><a class="daohang_text" href="${pageContext.request.contextPath}/resume/getPersonal.action">简历</a></li>
 
         <li class="dropdown navbar-right" style="padding-right:65px;margin-left: 350px;">
             <a href="#" data-toggle="dropdown" class="name daohang_text" >

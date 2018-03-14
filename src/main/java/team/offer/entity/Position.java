@@ -23,6 +23,7 @@ public class Position {
 
     private String positionSkill;
 
+    private String positionAddress;
 
     public Integer getPkPositionId() {
         return pkPositionId;
@@ -110,6 +111,14 @@ public class Position {
 
     public void setPositionName(String positionName) {
         this.positionName = positionName;
+    }
+
+    public String getPositionAddress() {
+        return positionAddress;
+    }
+
+    public void setPositionAddress(String positionAddress) {
+        this.positionAddress = positionAddress;
     }
 
     @Override

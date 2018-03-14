@@ -38,6 +38,10 @@ public class UserServiceImpl implements UserService {
         return userDao.queryUserById(id);
     }
 
+    public User findUserByEmail(String email) throws Exception{
+        return userDao.queryUserByEmail(email);
+    }
+
     public boolean register(User user) throws Exception {
         //判断用户是否重复注册
         if (userDao.queryUserByEmail(user.getUserEmail()) != null) {

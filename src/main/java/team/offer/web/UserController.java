@@ -57,12 +57,14 @@ public class UserController {
         String toEmail = request.getParameter("email");
         String requestURL = request.getParameter("request");
         //如果发送验证码请求来自 忘记密码 页面，需要验证邮箱是否存在
-        if(requestURL.equals("forgetemail")&&!userService.verifyEmail(toEmail)){
+        if(requestURL!=null&&!userService.verifyEmail(toEmail)){
             map.put("result","emailFalse");
             return map;
         }
         String title = "offer++注册验证码";
-        String content = (int) (Math.random() * 999999) + "";
+        String content = "您的验证码是："+(int) (Math.random() * 999999) + ""
+                + "\n验证码超过一分钟将失效";
+
         JavaEmailSender.sendEmail(toEmail, title, content);
         map.put("result", msg);
         //发送邮箱后，将验证码和发送邮箱时的系统时间记入session中
@@ -73,22 +75,24 @@ public class UserController {
 
     //注册
     @RequestMapping(value = "/register.action", method = {RequestMethod.POST})
-    public String register(Model model, String inputCode, String confirmPassword, HttpServletRequest request, @Validated User user, BindingResult result) throws Exception {
+    public String register(Model model, String inputCode, HttpServletRequest request, @Validated User user, BindingResult result) throws Exception {
+        String confirmPassword = request.getParameter("confirmPassword");
+        String code = request.getParameter("inputCode");
         //对邮箱和密码进行数据检验
         if (result.hasErrors()) {
             //如果参数绑定出错，获取所有错误
             List<ObjectError> errors = result.getAllErrors();
             model.addAttribute("errors", errors);
             //数据回显
-            model.addAttribute("user", user);
+            model.addAttribute("register_user", user);
             model.addAttribute("inputCode", inputCode);
             return "user/register";
         } else {
             //验证验证码，以及验证时间是否超过60s
             String registerCode = (String) request.getSession().getAttribute("code");
-            if ((!registerCode.equals(inputCode))||(System.currentTimeMillis()-(Long)request.getSession().getAttribute("code_time")>60000)) {
+            if ((!registerCode.equals(code))||(System.currentTimeMillis()-(Long)request.getSession().getAttribute("code_time")>60000)) {
                 //数据回显
-                model.addAttribute("user", user);
+                model.addAttribute("register_user", user);
                 model.addAttribute("inputCode", inputCode);
                 model.addAttribute("codeError", "验证码错误");
                 return "user/register";
@@ -99,7 +103,7 @@ public class UserController {
             //验证密码和确认密码是否相同
             if (!confirmPassword.equals(user.getUserPassword())) {
                 //数据回显
-                model.addAttribute("user", user);
+                model.addAttribute("register_user", user);
                 model.addAttribute("inputCode", inputCode);
                 model.addAttribute("confirmError", "确认密码和密码不同");
                 return "user/register";
@@ -107,13 +111,14 @@ public class UserController {
             //验证是否重复注册
             if (!userService.register(user)) {
                 //数据回显
-                model.addAttribute("user", user);
+                model.addAttribute("register_user", user);
                 model.addAttribute("inputCode", inputCode);
                 model.addAttribute("repeatEmail", "邮箱重复注册");
                 return "user/register";
             } else {
                 //注册成功，跳转到首页
-                return "user/index";
+                //将user加入到session中
+                return "redirect:/user/loginUI.action";
             }
         }
 
@@ -132,6 +137,14 @@ public class UserController {
                 model.addAttribute("password", loginInfo[1]);
                 model.addAttribute("remember", 1);
             }
+
+            if (cookie.getName().equals("comLoginInfo")) {
+                String[] loginInfo = cookie.getValue().split("#");
+                model.addAttribute("comEmail", loginInfo[0]);
+                model.addAttribute("comPassword", loginInfo[1]);
+                model.addAttribute("comRemCheck", 1);
+                System.out.println("cookies"+cookie);
+            }
         }
         return "user/login";
     }
@@ -144,7 +157,8 @@ public class UserController {
         //如果登录验证通过
         if (userService.login(user)) {
             //将user加入到session中
-            request.getSession().setAttribute("user", user);
+            User currentUser = userService.findUserByEmail(user.getUserEmail());
+            request.getSession().setAttribute("user", currentUser);
             //如果勾选记住我，将user保存到cookie
             if (!(remember == null || remember.equals(""))) {
                 Cookie userCookie = new Cookie("loginInfo", user.getUserEmail() + "," + password);
@@ -161,6 +175,8 @@ public class UserController {
                         cookie.setMaxAge(0);
                         cookie.setPath("/");
                         response.addCookie(cookie);
+
+
 
                     }
                 }

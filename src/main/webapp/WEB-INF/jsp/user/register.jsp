@@ -47,32 +47,44 @@
                 </div>
             </div>
 
+            <!--用户注册-->
             <div class="seeker-input">
+                <div class="form-group">
+                    <label for="userName" class="zhanghao_mima">姓名</label>
+                    <input type="text" class="form-control" id="name" placeholder="姓名" name="userName" value="${register_user.userName}">
+                    <span class="error_message">
+                        <c:forEach items="${errors}" var="error">
+                            <c:if test="${error.defaultMessage=='姓名不能为空'}">
+                                ${error.defaultMessage}
+                            </c:if>
+                        </c:forEach>
+                    </span>
+                </div>
                 <div class="form-group">
                     <label for="email" class="zhanghao_mima">邮箱</label>
                     <input type="email" class="form-control" id="email" placeholder="邮箱" name="userEmail"
-                           value="${user.userEmail}">
+                           value="${register_user.userEmail}">
                     <%--返回重复注册的错误信息--%>
                     <span class="error_message">
-                <c:if test="${repeatEmail!=null}">
-                    ${repeatEmail}
-                </c:if>
-                <%--返回邮箱校验的错误信息--%>
-                <c:forEach items="${errors}" var="error">
-                    <c:if test="${error.defaultMessage=='邮箱不能为空'}">
-                        ${error.defaultMessage}
-                    </c:if>
-                    <c:if test="${error.defaultMessage=='邮箱格式不正确'}">
-                        ${error.defaultMessage}
-                    </c:if>
-                </c:forEach>
+                        <c:if test="${repeatEmail!=null}">
+                            ${repeatEmail}
+                        </c:if>
+                    <%--返回邮箱校验的错误信息--%>
+                    <c:forEach items="${errors}" var="error">
+                        <c:if test="${error.defaultMessage=='邮箱不能为空'}">
+                            ${error.defaultMessage}
+                        </c:if>
+                        <c:if test="${error.defaultMessage=='邮箱格式不正确'}">
+                            ${error.defaultMessage}
+                        </c:if>
+                    </c:forEach>
                     </span>
                 </div>
+
                 <button class="fr btn btn-primary" type="button" onclick="sendEmail()">发送验证码</button>
                 <div class="form-group">
                     <label for="inputCode" class="zhanghao_mima">验证码</label>
-                    <input type="number" class="form-control" id="inputCode" name="inputCode" placeholder="请填写邮件中的验证码"
-                           value="${inputCode}">
+                    <input type="number" class="form-control" id="inputCode" name="inputCode" placeholder="请填写邮件中的验证码">
                     <%--返回验证码错误的错误信息--%>
                     <span class="error_messagae">
                 <c:if test="${codeError!=null}">
@@ -83,7 +95,7 @@
                 <div class="form-group">
                     <label for="password" class="zhanghao_mima">密码</label>
                     <input type="password" class="form-control" id="password" name="userPassword" placeholder="密码"
-                           value="${user.userPassword}">
+                           value="${register_user.userPassword}">
                     <%--返回密码校验的错误信息--%>
                     <span class="error">
                 <c:forEach items="${errors}" var="error">
@@ -99,7 +111,7 @@
                 <div class="form-group">
                     <label for="confirmPassword" class="zhanghao_mima">确认密码</label>
                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                           placeholder="确认密码" value="${user.userPassword}">
+                           placeholder="确认密码" value="${register_user.userPassword}">
                     <%--返回确认密码的错误信息--%>
                     <span class="error">
                 <c:if test="${confirmError!=null}">
@@ -111,12 +123,23 @@
                 <button type="submit" class="btn btn-primary btn-block">确定</button>
             </div>
 
+            <!--公司注册-->
             <div class="hr-input">
 
                 <div class="form-group">
                     <label for="comNo">企业工商注册号</label>
                     <input type="number" class="form-control" id="comNo" placeholder="企业工商注册号" name="comNo">
                     <p hidden id="comNoNullError" class="frontVerify">企业工商注册号不能为空</p>
+                </div>
+                <div class="form-group">
+                    <label for="comName">企业名称</label>
+                    <input type="text" class="form-control" id="comName" placeholder="企业名称" name="comName">
+                    <p hidden id="comNameNullError" class="frontVerify">企业名称不能为空</p>
+                </div>
+                <div class="form-group">
+                    <label for="comLegalperson">企业法人代表</label>
+                    <input type="text" class="form-control" id="comLegalperson" placeholder="企业法人代表" name="comLegalperson">
+                    <p hidden id="comLegalpersonNullError" class="frontVerify">企业法人代表不能为空</p>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail">企业邮箱</label>
@@ -201,6 +224,8 @@
         //提交表单
         $('#formSubmit').click(function () {
             var comNo=$('#comNo').val();
+            var comName=$('#comName').val();
+            var comLegalperson=$('#comLegalperson').val();
             var comEmail=$('#comEmail').val();
             var comPassword=$('#comPassword').val();
             var confirmPassword=$('#confirmPassword_company').val();
@@ -211,6 +236,12 @@
             //企业工商注册号不为空
             if(comNo.length==0){
                 $('#comNoNullError').show();
+            }
+            else if(comName.length==0){
+                $('#comNameNullError').show();
+            }
+            else if(comLegalperson.length==0){
+                $('#comLegalpersonNullError').show();
             }
             //密码长度为6-16位字
             else if(comPassword.length<6||comPassword.length>16){
@@ -224,6 +255,8 @@
                     inputCode:inputCode,
                     confirmPassword:confirmPassword,
                     comNo:comNo,
+                    comName:comName,
+                    comLegalperson:comLegalperson,
                     comEmail:comEmail,
                     comPassword:comPassword
                 };
@@ -266,7 +299,9 @@
             type: "post",
             data: {},
             success: function (data) {
-
+                if(data.result=='ok'){
+                    alert("验证码发送成功");
+                }
             },
             error: function () {
                 alert("发送验证码失败！");

@@ -31,8 +31,8 @@
         </div>
         <div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="${basePath}userManage.action?page=1">用户管理</a></li>
-                <li class="dropdown active">
+                <li ><a href="${basePath}userManage.action?page=1">用户管理</a></li>
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         企业管理
                         <b class="caret"></b>
@@ -58,6 +58,7 @@
         </div>
     </div>
 </nav>
+
 
 <div class="container">
     <div class="row myCenter">

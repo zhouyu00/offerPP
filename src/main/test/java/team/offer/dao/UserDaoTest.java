@@ -50,8 +50,9 @@ public class UserDaoTest {
     }
 
     @Test
-    public void updateUserPasswordById() throws Exception {
-        userDao.updateUserPasswordById(1,"369258147");
+    public void updateUserPasswordByEmail() throws Exception {
+        int count = userDao.updateUserPasswordByEmail("342141672@qq.com","123456789");
+        System.out.println(count);
     }
 
     @Test
@@ -103,6 +104,11 @@ public class UserDaoTest {
     @Test
     public void insertCollection() throws Exception {
         userDao.insertCollection(1,2);
+    }
+
+    @Test
+    public void queryCompanyById() throws Exception {
+        System.out.println(userDao.queryCompanyById(1));
     }
 
     @org.junit.Test

@@ -25,7 +25,7 @@ public class AdminServiceImpl implements AdminService {
     //管理员登录
     public Boolean adminLogin(int id,String password) throws Exception{
         Admin admin =  adminDao.findAdminById(id);
-        if(admin.getAdministratorPassword().equals(password))
+        if(admin!=null&&admin.getAdministratorPassword().equals(password))
             return true;
         return false;
     }

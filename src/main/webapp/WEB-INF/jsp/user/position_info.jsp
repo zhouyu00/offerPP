@@ -112,7 +112,7 @@
                     </div>
 
                     <div class="items" id="#">工作地点</div>
-                    <div class="workplace" id="#"><p>${positionQuery.comLocation}</p></div>
+                    <div class="workplace" id="#"><p>${positionQuery.positionAddress}</p></div>
 
                 </div>
 

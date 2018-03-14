@@ -77,7 +77,9 @@
             success: function (data) {
                 if(data.result=="emailFalse"){
                     alert("邮箱输入错误，请重新输入！");
-
+                }
+                if(data.result=='ok'){
+                    alert("验证码发送成功");
                 }
             },
             error:function(){
