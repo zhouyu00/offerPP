@@ -79,7 +79,13 @@
             <div class="profile-panel">
 
                 <div class="user_img">
-                    <img src="/pic/${personalInformation.userIcon}" class="fl" width=100 height=10/>
+                    <c:if test="${personalInformation.userIcon==null}">
+                        <img src="<c:url value="/img/talent_blank.jpg-200w"/>" class="fl" width=100 height=10/>
+                    </c:if>
+                    <c:if test="${personalInformation.userIcon!=null}">
+                        <img src="/pic/${personalInformation.userIcon}" class="fl" width=100 height=10/>
+                    </c:if>
+
                     <div class="fl filecontainer">
                         <p class="file_name">头像上传后将自动保存</p>
 
