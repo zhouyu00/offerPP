@@ -62,13 +62,13 @@ public class UserController {
             return map;
         }
         String title = "offer++注册验证码";
-        String content = "您的验证码是："+(int) (Math.random() * 999999) + ""
-                + "\n验证码超过一分钟将失效";
+        String code = String.valueOf((int) (Math.random() * 999999));
+        String content = "您的验证码是："+ code + "\n验证码超过一分钟将失效";
 
         JavaEmailSender.sendEmail(toEmail, title, content);
         map.put("result", msg);
         //发送邮箱后，将验证码和发送邮箱时的系统时间记入session中
-        request.getSession().setAttribute("code", content);
+        request.getSession().setAttribute("code", code);
         request.getSession().setAttribute("code_time",System.currentTimeMillis());
         return map;
     }

@@ -190,7 +190,13 @@
                 <div class="right_first">
                     <div class="row">
                         <div class="col-md-4 col-lg-4 col-md-offset-3 col-md-offset-3">
-                            <img src="/pic/${user.userIcon}" class="head img-circle" id="head">
+                            <c:if test="${user.userIcon==null}">
+                                <img src="<c:url value="/img/talent_blank.jpg-200w"/>" class="head img-circle" id="head">
+                            </c:if>
+
+                            <c:if test="${user.userIcon!=null}">
+                                <img src="/pic/${user.userIcon}" class="head img-circle" id="head">
+                            </c:if>
                         </div>
                     </div>
 
@@ -199,16 +205,25 @@
                     </div>
 
                     <div class="jobwantline">
-                        <span class="jobwant">${user.userStation}</span>
+                        <c:if test="${user.userStation!=null}">
+                            <span class="jobwant">${user.userStation}</span>
+                        </c:if>
+
                     </div>
 
                     <div class="userinfo">
-                        <span class="glyphicon glyphicon-map-marker"></span>${user.userAddressCity}
+                        <c:if test="${user.userStation!=null}">
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                            ${user.userAddressCity}
+                        </c:if>
                     </div>
 
                     <div class="userinfo">
-                        <span class="glyphicon glyphicon-tag"></span>
-                        ${user.userExperience}
+                        <c:if test="${user.userStation!=null}">
+                            <span class="glyphicon glyphicon-tag"></span>
+                            ${user.userExperience}
+                        </c:if>
+
                     </div>
 
 
