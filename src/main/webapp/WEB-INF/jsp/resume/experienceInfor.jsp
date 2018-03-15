@@ -153,9 +153,6 @@
                 if (data.result == "changepass") {
                     window.location.href = "${pageContext.request.contextPath}/resume/getExperience.action?result=ok";
                 }
-            },
-            error: function () {
-                alert("保存失败");
             }
         })
     });
