@@ -125,14 +125,12 @@
                 "resume": resume
             },
             success: function (data) {
-
+//                alert("保存成功!");
                 if (data.result == "changepass") {
                     window.location.href = "${pageContext.request.contextPath}/resume/getDescription.action?result=ok";
                 }
-            },
-            error: function () {
-                alert("保存失败");
             }
+
         })
     });
 </script>
