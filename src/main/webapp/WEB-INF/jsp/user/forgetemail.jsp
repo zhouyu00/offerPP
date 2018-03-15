@@ -28,18 +28,7 @@
     <div class="row">
         <form class="col-xs-12 col-md-6 col-md-offset-3" action="${pageContext.request.contextPath}/user/forgetEmail.action" method="post">
             <h1>找回密码</h1>
-            <div class="type_choose">
-                <div class="fl user_type_box">
-                    <div class="radio">
-                        <label><input type="radio" name="user_type" checked="checked"/> 我是候选人</label>
-                    </div>
-                </div>
-                <div class="fr user_type_box">
-                    <div class="radio">
-                        <label><input type="radio" name="user_type"/> 我是HR</label>
-                    </div>
-                </div>
-            </div>
+
             <div class="form-group">
                 <label for="email">邮箱</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="邮箱">
